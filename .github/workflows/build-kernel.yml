@@ -9,7 +9,9 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@v4
+        with:
+          submodules: 'true'
 
       - name: Setup timezone
         uses: szenius/set-timezone@master
@@ -30,13 +32,13 @@ jobs:
       - name: Git variables
         run: |
           HEAD="$(git rev-parse HEAD)"
-          HEAD_COMMIT="https://github.com/rd-stuffs/msm-4.14/commit/$HEAD"
+          HEAD_COMMIT="https://github.com/surya-aosp/arise_xiaomi_surya/commit/$HEAD"
           echo "HEAD_COMMIT=${HEAD_COMMIT}" >> $GITHUB_ENV
 
       - name: Upload build artifact
         uses: actions/upload-artifact@main
         with:
-          name: my-artifact
+          name: Arise-Kernel
           path: ${{ env.ZIPNAME }}
 
       - name: Upload to Telegram
